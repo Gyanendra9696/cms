@@ -31,37 +31,59 @@ export const LoginPage: React.FC = () => {
   return (
     <div style={{ display: "flex", height: "100vh", width: "100vw", fontFamily: "Inter, Arial, sans-serif", margin: 0, padding: 0, backgroundColor: "#f8fafc", overflow: "hidden", boxSizing: "border-box" }}>
       
-      {/* Left Branding Panel with Illustration */}
-      <div style={{ flex: 1, background: "linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)", padding: "40px 60px", display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", textAlign: "center", boxSizing: "border-box" }}>
-        <div>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "10px", backgroundColor: "white", padding: "8px 16px", borderRadius: "20px", marginBottom: "20px", boxShadow: "0 2px 6px rgba(0,0,0,0.05)" }}>
-            <span style={{ fontSize: "16px" }}>⚙️</span>
-            <span style={{ fontSize: "14px", fontWeight: "800", color: "#0f172a" }}>CMMS Platform</span>
-          </div>
-
-          <h1 style={{ fontSize: "28px", fontWeight: "800", color: "#0f172a", margin: "0 0 6px 0", letterSpacing: "-0.5px" }}>
-            Enterprise CMMS
-          </h1>
-          <p style={{ fontSize: "14px", color: "#475569", margin: 0, fontWeight: "400" }}>
-            Smart Factory Asset & Maintenance Management System
-          </p>
+      {/* Left Branding Panel */}
+      <div style={{ 
+        flex: 1, 
+        backgroundImage: "linear-gradient(135deg, rgba(0, 30, 80, 0.8), rgba(0, 50, 120, 0.6)), url('/assets/images/login-background.png')",
+        backgroundSize: "cover",
+        backgroundPosition: "left center",
+        backgroundRepeat: "no-repeat",
+        padding: "60px", 
+        display: "flex", 
+        flexDirection: "column", 
+        justifyContent: "space-between", 
+        color: "white",
+        boxSizing: "border-box"
+      }}>
+        {/* Hero Section */}
+        <div style={{ marginTop: "60px" }}>
+          <h1 style={{ fontSize: "40px", fontWeight: "900", margin: "0 0 10px 0", letterSpacing: "-1px" }}>CMS ERP</h1>
+          <p style={{ fontSize: "20px", fontWeight: "300", opacity: 0.9, margin: "0 0 30px 0" }}>Enterprise Maintenance Management System</p>
+          <h2 style={{ fontSize: "28px", fontWeight: "600", margin: "0 0 10px 0" }}>Predict. Prevent. Perform.</h2>
+          <p style={{ fontSize: "16px", fontWeight: "300", opacity: 0.8, maxWidth: "400px" }}>Intelligent Maintenance & Asset Management for Modern Enterprises.</p>
         </div>
 
-        {/* Professional Vector Illustration Card */}
-        <div style={{ width: "100%", maxWidth: "380px", background: "rgba(255, 255, 255, 0.75)", backdropFilter: "blur(10px)", padding: "24px", borderRadius: "24px", border: "1px solid rgba(255, 255, 255, 0.9)", boxShadow: "0 10px 25px rgba(37, 99, 235, 0.08)" }}>
-          <img 
-            src="/assets/images/login-background.png" 
-            alt="Branding" 
-            style={{ width: "100%", height: "auto", maxHeight: "190px", objectFit: "cover", marginBottom: "14px" }} 
-          />
-          <div style={{ fontSize: "12px", color: "#1e293b", fontWeight: "700" }}>
-            🏢 Smart Factory &nbsp;|&nbsp; 👷 Mobile Workflows &nbsp;|&nbsp; 📊 Analytics
-          </div>
+        {/* Feature Panel */}
+        <div style={{
+          background: "rgba(255, 255, 255, 0.08)",
+          backdropFilter: "blur(15px)",
+          border: "1px solid rgba(255, 255, 255, 0.15)",
+          borderRadius: "20px",
+          padding: "25px",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "20px",
+          marginBottom: "40px"
+        }}>
+          {[
+            { icon: "🛡️", title: "Reliable Assets", desc: "Improve equipment reliability" },
+            { icon: "📅", title: "Preventive Maintenance", desc: "Reduce unexpected failures" },
+            { icon: "📈", title: "Better Performance", desc: "Increase operational efficiency" },
+            { icon: "📊", title: "Real-time Monitoring", desc: "Track assets instantly" }
+          ].map((item, index) => (
+            <div key={index} style={{ display: "flex", gap: "12px", alignItems: "start" }}>
+              <div style={{ fontSize: "24px" }}>{item.icon}</div>
+              <div>
+                <div style={{ fontWeight: "700", fontSize: "14px" }}>{item.title}</div>
+                <div style={{ fontSize: "12px", opacity: 0.8 }}>{item.desc}</div>
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* Single Line Footer */}
-        <div style={{ fontSize: "11px", color: "#64748b", fontWeight: "500" }}>
-          Version 1.0.0 &nbsp;|&nbsp; Development &nbsp;|&nbsp; © 2026 Company
+        {/* Footer */}
+        <div style={{ fontSize: "12px", opacity: 0.7, textAlign: "center" }}>
+          Version 1.0.0 | Development | © 2026 CMS ERP
         </div>
       </div>
 
@@ -71,11 +93,13 @@ export const LoginPage: React.FC = () => {
         <div style={{ width: "100%", maxWidth: "420px", background: "white", padding: "30px 35px", borderRadius: "28px", boxShadow: "0 20px 40px -15px rgba(0, 0, 0, 0.08)", border: "1px solid #f1f5f9", boxSizing: "border-box" }}>
           
           <div style={{ textAlign: "center", marginBottom: "20px" }}>
-            <img 
-              src="/assets/logo/logo.png" 
-              alt="Logo" 
-              style={{ width: "50px", height: "50px", objectFit: "contain", margin: "0 auto 10px auto" }} 
-            />
+            <div style={{ width: "110px", height: "110px", borderRadius: "50%", background: "white", boxShadow: "0 4px 10px rgba(0,0,0,0.1)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 10px auto" }}>
+              <img 
+                src="/assets/logo/logo.png" 
+                alt="Logo" 
+                style={{ width: "85%", height: "85%", objectFit: "contain" }} 
+              />
+            </div>
             <h2 style={{ margin: "0 0 4px 0", fontSize: "22px", fontWeight: "800", color: "#0f172a" }}>Welcome Back</h2>
             <p style={{ margin: 0, fontSize: "13px", color: "#64748b" }}>Sign in to continue to Enterprise CMMS</p>
           </div>
