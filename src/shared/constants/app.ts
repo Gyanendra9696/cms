@@ -16,4 +16,5 @@ export const ROUTES = {
 
 export const STORAGE_KEYS = {
   AUTH_TOKEN: 'cms_auth_token',
+  AUTH_USER: 'cms_auth_user',
 } as const;

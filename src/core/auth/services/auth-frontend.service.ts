@@ -10,6 +10,8 @@ import type {
   ForgotPasswordResponseDTO
 } from '@shared/dtos/auth';
 import { STORAGE_KEYS } from '@shared/constants/app';
+import { DEVELOPMENT_AUTH } from '../config/auth.config';
+import { authenticateDevelopmentUser } from '../mocks/development-auth';
 
 export class AuthFrontendService {
   private getAuthToken(): string | null {
@@ -17,9 +19,48 @@ export class AuthFrontendService {
   }
 
   async login(dto: LoginRequestDTO, tenant: TenantHeaders): Promise<LoginResponseDTO> {
-    const response = await apiClient.post<LoginRequestDTO, LoginResponseDTO>('/auth/login', dto, tenant);
-    localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, response.accessToken);
-    return response;
+    if (DEVELOPMENT_AUTH) {
+      // TODO: Remove development authentication after backend integration.
+      const user = authenticateDevelopmentUser(dto.identifier, dto.password);
+      
+      if (user) {
+        const mockResponse: LoginResponseDTO = {
+          accessToken: 'fake-token',
+          refreshToken: 'fake-refresh-token',
+          user: {
+            id: 'mock-user-id',
+            email: user.email,
+            roles: [user.roleCode], // Storing roleCode as role
+            permissions: [],
+            tenantId: tenant['x-tenant-id'] || user.tenantId
+          }
+        };
+        localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, mockResponse.accessToken);
+        this.saveCurrentUser(mockResponse.user);
+        return mockResponse;
+      } else {
+        throw new Error('Invalid credentials');
+      }
+    } else {
+      const response = await apiClient.post<LoginRequestDTO, LoginResponseDTO>('/auth/login', dto, tenant);
+      localStorage.setItem(STORAGE_KEYS.AUTH_TOKEN, response.accessToken);
+      this.saveCurrentUser(response.user);
+      return response;
+    }
+  }
+
+  saveCurrentUser(user: CurrentUserDTO): void {
+    localStorage.setItem(STORAGE_KEYS.AUTH_USER, JSON.stringify(user));
+  }
+
+  getCurrentUser(): CurrentUserDTO | null {
+    const user = localStorage.getItem(STORAGE_KEYS.AUTH_USER);
+    return user ? JSON.parse(user) : null;
+  }
+
+  clearCurrentUser(): void {
+    localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+    localStorage.removeItem(STORAGE_KEYS.AUTH_USER);
   }
 
   async refresh(dto: RefreshTokenRequestDTO, tenant: TenantHeaders): Promise<RefreshTokenResponseDTO> {

@@ -1,0 +1,37 @@
+.dashboard-search {
+  width: 220px;
+}
+
+.dashboard-avatar {
+  width: 40px;
+  height: 40px;
+  font-size: 15px;
+}
+
+.notification-button {
+  width: 40px;
+  height: 40px;
+}
+
+.stat-icon-box {
+  width: 48px;
+  height: 48px;
+  font-size: 24px;
+}
+
+.text-purple {
+  color: #6f42c1;
+}
+
+.bg-purple-subtle {
+  background-color: #f3e5f5;
+}
+
+.transition-hover {
+  transition: all 0.2s ease-in-out;
+}
+
+.transition-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
