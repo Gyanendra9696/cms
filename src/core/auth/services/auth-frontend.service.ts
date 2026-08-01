@@ -6,7 +6,8 @@ import type {
   RefreshTokenRequestDTO, 
   RefreshTokenResponseDTO,
   CurrentUserDTO,
-  LogoutRequestDTO
+  LogoutRequestDTO,
+  ForgotPasswordResponseDTO
 } from '@shared/dtos/auth';
 import { STORAGE_KEYS } from '@shared/constants/app';
 
@@ -38,5 +39,17 @@ export class AuthFrontendService {
   async logout(dto: LogoutRequestDTO, tenant: TenantHeaders): Promise<void> {
     await apiClient.post<LogoutRequestDTO, unknown>('/auth/logout', dto, tenant);
     localStorage.removeItem(STORAGE_KEYS.AUTH_TOKEN);
+  }
+
+  async forgotPassword(identifier: string): Promise<ForgotPasswordResponseDTO> {
+    // TODO: Connect to real API: POST /api/auth/forgot-password
+    // return await apiClient.post<any, ForgotPasswordResponseDTO>('/api/auth/forgot-password', { identifier });
+
+    // Placeholder until backend is available
+    return {
+      success: false,
+      code: 'SERVICE_UNAVAILABLE',
+      message: 'Forgot Password service is currently unavailable. This feature will be enabled after authentication backend integration.'
+    };
   }
 }
